@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import licenta.controller.CereriController;
 import licenta.dao.CereriDao;
-import licenta.model.Cereri;
+import licenta.model.Cerere;
 
 @Service
 @Transactional(readOnly = true)
@@ -17,21 +18,21 @@ public class CereriService {
 	private CereriDao cereriDao;
 
 	@Transactional
-	public Cereri save(Cereri cereri) {
-		return cereriDao.save(cereri);
+	public Cerere save(Cerere cerere) {
+		return cereriDao.save(cerere);
 	}
 
-	public Cereri get(int id) {
+	public Cerere get(int id) {
 		return cereriDao.get(id);
 	}
-
-	public List<Cereri> list() {
+	
+	public List<Cerere> list() {
 		return cereriDao.list();
 	}
 
 	@Transactional
-	public void update(int id, Cereri cereri) {
-		cereriDao.update(id, cereri);
+	public void update(int id, Cerere cerere) {
+		cereriDao.update(id, cerere);
 		
 	}
 
@@ -40,5 +41,14 @@ public class CereriService {
 		cereriDao.delete(id);
 		
 	}
+
+	public List<Cerere> getByIdStudent(int id) {
+		return cereriDao.getByIdStudent(id);
+	}
+
+	public List<Cerere> getByIdCamin(int id) {
+		return cereriDao.getByIdCamin(id);
+	}
+	
 
 }

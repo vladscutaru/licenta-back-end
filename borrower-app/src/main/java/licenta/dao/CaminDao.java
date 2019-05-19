@@ -43,7 +43,7 @@ public class CaminDao {
 		Session session = sessionFactory.getCurrentSession();
 		Camin camin2 = session.byId(Camin.class).load(id);
 		camin2.setLocuriOcupate(camin.getLocuriOcupate());
-		camin2.setIdSefCamin(camin.getIdSefCamin());
+		camin2.setNumeSefCamin(camin.getNumeSefCamin());
 		session.flush();
 	}
 

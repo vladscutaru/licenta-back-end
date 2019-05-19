@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "camera")
 
@@ -36,10 +34,6 @@ public class Camera {
 	
 	@Column(name = "locuriOcupate")
 	private int locuriOcupate;
-	
-	@ManyToOne
-	@JoinColumn(name = "idSefPalier")
-	private Student idSefPalier;
 
 	public int getId() {
 		return id;
@@ -88,15 +82,5 @@ public class Camera {
 	public void setLocuriOcupate(int locuriOcupate) {
 		this.locuriOcupate = locuriOcupate;
 	}
-
-	public Student getIdSefPalier() {
-		return idSefPalier;
-	}
-
-	public void setIdSefPalier(Student idSefPalier) {
-		this.idSefPalier = idSefPalier;
-	}
 	
-	
-
 }

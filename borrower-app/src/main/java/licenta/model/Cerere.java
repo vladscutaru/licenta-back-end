@@ -10,12 +10,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cereri")
+@Table(name = "cerere")
 
-public class Cereri {
+public class Cerere {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	
 	@Column(name = "idStudent")
 	private int idStudent;
 	
@@ -70,6 +73,17 @@ public class Cereri {
 	
 	@Column(name = "confirmatAnUrm")
 	private boolean confirmat;
+	
+	@Column(name = "status")
+	private String status;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getIdStudent() {
 		return idStudent;
@@ -214,5 +228,15 @@ public class Cereri {
 	public void setConfirmat(boolean confirmat) {
 		this.confirmat = confirmat;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 
 }

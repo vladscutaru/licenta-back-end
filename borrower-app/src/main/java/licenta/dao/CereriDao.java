@@ -12,55 +12,75 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import licenta.model.Cereri;
+import licenta.model.Camera;
+import licenta.model.Cerere;
 
 @Repository
 public class CereriDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public Cereri save(Cereri cereri) {
-		sessionFactory.getCurrentSession().save(cereri);
-		return cereri;
+	public Cerere save(Cerere admin) {
+		sessionFactory.getCurrentSession().save(admin);
+		return admin;
 	}
 
-	public Cereri get(int id) {
-		return sessionFactory.getCurrentSession().get(Cereri.class, id);
+	public Cerere get(int id) {
+		return sessionFactory.getCurrentSession().get(Cerere.class, id);
 	}
 
-	public List<Cereri> list() {
+	public List<Cerere> list() {
 		Session session = sessionFactory.getCurrentSession();
 		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<Cereri> cq = cb.createQuery(Cereri.class);
-		Root<Cereri> root = cq.from(Cereri.class);
+		CriteriaQuery<Cerere> cq = cb.createQuery(Cerere.class);
+		Root<Cerere> root = cq.from(Cerere.class);
 		cq.select(root);
-		Query<Cereri> query = session.createQuery(cq);
+		Query<Cerere> query = session.createQuery(cq);
 		return query.getResultList();
 	}
 
-	public void update(int id, Cereri cereri) {
+	public void update(int id, Cerere cerere) {
 		Session session = sessionFactory.getCurrentSession();
-		Cereri cereri2 = session.byId(Cereri.class).load(id);
-		cereri2.setAn(cereri.getAn());
-		cereri2.setTelefon(cereri.getTelefon());
-		cereri2.setOrfan(cereri.isOrfan());
-		cereri2.setSituatieSocialaPrecara(cereri.isSituatieSocialaPrecara());
-		cereri2.setSituatieMedicalaSpeciala(cereri.isSituatieMedicalaSpeciala());
-		cereri2.setArhiva(cereri.getArhiva());
-		cereri2.setCazat(cereri.isCazat());
-		cereri2.setCamin(cereri.getCamin());
-		cereri2.setEtaj(cereri.getEtaj());
-		cereri2.setCamera(cereri.getCamera());
-		cereri2.setConfirmat(cereri.isConfirmat());
+		Cerere cerere2 = session.byId(Cerere.class).load(id);
+		cerere2.setAn(cerere.getAn());
+		cerere2.setTelefon(cerere.getTelefon());
+		cerere2.setOrfan(cerere.isOrfan());
+		cerere2.setSituatieSocialaPrecara(cerere.isSituatieSocialaPrecara());
+		cerere2.setSituatieMedicalaSpeciala(cerere.isSituatieMedicalaSpeciala());
+		cerere2.setArhiva(cerere.getArhiva());
+		cerere2.setCazat(cerere.isCazat());
+		cerere2.setCamin(cerere.getCamin());
+		cerere2.setEtaj(cerere.getEtaj());
+		cerere2.setCamera(cerere.getCamera());
+		cerere2.setStatus(cerere.getStatus());
 		session.flush();
 	}
 
 	public void delete(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Cereri cereri = session.byId(Cereri.class).load(id);
-		session.delete(cereri);
+		Cerere cerere = session.byId(Cerere.class).load(id);
+		session.delete(cerere);
 	}
 
+	public List<Cerere> getByIdStudent(int idStudent) {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		Query<Cerere> q = session.createQuery("SELECT c from Cerere c WHERE c.idStudent=:idStudent");
+		q.setParameter("idStudent", idStudent);
+        List<Cerere> toateCererile=q.getResultList();
+        return toateCererile;
+	}
+
+	public List<Cerere> getByIdCamin(int idCamin) {
+		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<Cerere> query = cb.createQuery(Cerere.class);
+        Root<Cerere> root = query.from(Cerere.class);
+        query.select(root).where(cb.equal(root.get("camin"), idCamin));
+        Query<Cerere> q=session.createQuery(query);
+        List<Cerere> toateCererile=q.getResultList();
+        return toateCererile;
+	}
 
 }

@@ -53,7 +53,6 @@ public class CameraDao {
 	public void update(int id, Camera camera) {
 		Session session = sessionFactory.getCurrentSession();
 		Camera camera2 = session.byId(Camera.class).load(id);
-		camera2.setIdSefPalier(camera.getIdSefPalier());
 		camera2.setNumarLocuri(camera.getNumarLocuri());
 		camera2.setLocuriOcupate(camera.getLocuriOcupate());
 		session.flush();

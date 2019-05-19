@@ -29,14 +29,13 @@ public class Camin {
 	private String numarEtaje;
 	
 	@Column(name = "locuriOcupate")
-	private String locuriOcupate;
+	private int locuriOcupate;
 	
 	@Column(name = "facultate")
 	private String facultate;
 	
-	@OneToOne
-	@JoinColumn(name = "idSefCamin")
-	private Student idSefCamin;
+	@Column(name = "numeSefCamin")
+	private String numeSefCamin;
 
 	public int getIdCamin() {
 		return idCamin;
@@ -70,11 +69,11 @@ public class Camin {
 		this.numarEtaje = numarEtaje;
 	}
 
-	public String getLocuriOcupate() {
+	public int getLocuriOcupate() {
 		return locuriOcupate;
 	}
 
-	public void setLocuriOcupate(String locuriOcupate) {
+	public void setLocuriOcupate(int locuriOcupate) {
 		this.locuriOcupate = locuriOcupate;
 	}
 
@@ -86,13 +85,14 @@ public class Camin {
 		this.facultate = facultate;
 	}
 
-	public Student getIdSefCamin() {
-		return idSefCamin;
+	public String getNumeSefCamin() {
+		return numeSefCamin;
 	}
 
-	public void setIdSefCamin(Student idSefCamin) {
-		this.idSefCamin = idSefCamin;
+	public void setNumeSefCamin(String numeSefCamin) {
+		this.numeSefCamin = numeSefCamin;
 	}
+
 	
 	
 
