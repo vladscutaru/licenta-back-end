@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import licenta.model.Camera;
 import licenta.model.Cerere;
 import licenta.service.CereriService;
 
@@ -26,50 +25,51 @@ public class CereriController {
 	@Autowired
 	private CereriService cereriService;
 	
-	/*---Add new cerere---*/
+	/*---Adaugă o nouă cerere---*/
 	@PostMapping("")
 	public ResponseEntity<?> save(@RequestBody Cerere cerere) {
 		Cerere resp = cereriService.save(cerere);
 		return ResponseEntity.ok().body(resp);
 	}
-	/*---Get a cerere by id---*/
+	/*---Obține o cerere după id-ul ei---*/
 	@GetMapping("/{id}")
 	public ResponseEntity<Cerere> get(@PathVariable("id") int id) {
 		Cerere admin = cereriService.get(id);
 		return ResponseEntity.ok().body(admin);
 	}
 	
-	/*---Get a cerere by idStudent---*/
+	/*---Obține o cerere în funcție de idStudent---*/
 	@GetMapping("/getByIdStudent/{id}")
 	public ResponseEntity<List<Cerere>> getByIdStudent(@PathVariable("id") int id) {
 		List<Cerere> cereri = cereriService.getByIdStudent(id);
 		return ResponseEntity.ok().body(cereri);
 	}
 	
-	/*---Get a cerere by status---*/
-	@GetMapping("/getByIdCamin/{id}")
-	public ResponseEntity<List<Cerere>> getByIdCamin(@PathVariable("id") int id) {
-		List<Cerere> cereri = cereriService.getByIdCamin(id);
-		return ResponseEntity.ok().body(cereri);
-	}
-	
-	/*---get all cereri---*/
+	/*---Obține toate cererile---*/
 	@GetMapping("")
 	public ResponseEntity<List<Cerere>> list() {
 		List<Cerere> cereri = cereriService.list();
 		return ResponseEntity.ok().body(cereri);
 	}
-	/*---Update a cerere by id---*/
+	
+	/*---Obține o cerere în funcție de status---*/
+	@GetMapping("/getByIdCamin/{id}")
+	public ResponseEntity<List<Cerere>> getByIdCamin(@PathVariable("id") int id) {
+		List<Cerere> cereri = cereriService.getByIdCamin(id);
+		return ResponseEntity.ok().body(cereri);
+	}
+		
+	/*---Actualizează o cerere după id---*/
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Cerere cerere) {
 		cereriService.update(id, cerere);
-		return ResponseEntity.ok().body("Cerere has been updated successfully.");
+		return ResponseEntity.ok().body("The request has been updated successfully.");
 	}
 
-	/*---Delete a cerere by id---*/
+	/*---Șterge o cerere după id---*/
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id) {
 		cereriService.delete(id);
-		return ResponseEntity.ok().body("Cerere has been deleted successfully.");
+		return ResponseEntity.ok().body("The request has been deleted successfully.");
 	}
 }
